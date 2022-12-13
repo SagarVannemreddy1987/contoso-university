@@ -1,0 +1,4 @@
+variables:
+    AZURE_ACR_NAME: ''
+    ACR_CONNECTION: ''
+    NUM_POD_REPLICAS: ''

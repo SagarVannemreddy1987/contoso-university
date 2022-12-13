@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: #{APP_NAME}#
+spec:
+  replicas: #{NUM_POD_REPLICAS}#
+  selector:
+    matchLabels:
+      app: #{APP_NAME}#
+  template:
+    metadata:
+      labels:
+        app: #{APP_NAME}#
+    spec:
+      containers:
+      - name: #{APP_NAME}#
+        image: #{AZURE_ACR_NAME}#.azurecr.io/#{POD_NAME}#/#{APP_TYPE}#/#{APP_NAME}#:#{Build.BuildId}#
+        ports:
+        - containerPort: <Port>
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: #{APP_NAME}#
+spec:
+  type: ClusterIP
+  ports:
+   - name: tcp
+     protocol: TCP
+     port: <port>
+     targetPort: <Target Port>
+  selector:
+    app: myapp
